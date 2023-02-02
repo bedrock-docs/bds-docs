@@ -1,7 +1,7 @@
 import { readJSON, writeJSON } from "./file.ts";
 import { fetchBDSVersions } from "./http.ts";
 import { generateDocumentation } from "./bds.ts";
-import { BDSArchitecture } from "./types.ts";
+import { BDSArchitecture, ReleaseType, Versions } from "./types.ts";
 
 async function main() {
   const bdsVersions = await fetchBDSVersions();
@@ -14,30 +14,25 @@ async function main() {
   }
 
   const versionsPath = "./versions.json";
-  const versions = await readJSON<string[]>(versionsPath);
+  const versionsMap = await readJSON<Versions>(versionsPath);
 
   const arch: BDSArchitecture = Deno.build.os;
   const bdsVersion = bdsVersions[arch];
 
-  {
-    const version = bdsVersion.stable;
-    if (!versions.includes(version)) {
-      console.log("Start generate stable", version, "docs.");
-      await generateDocumentation(arch, version, false);
-      versions.push(version);
+  const types: ReleaseType[] = ["stable", "preview"];
+  for (const type of types) {
+    const version = bdsVersion[type];
+    const versions = versionsMap[type];
+    if (versions.includes(version)) {
+      continue;
     }
+
+    console.log("Start generate", type, version, "docs.");
+    await generateDocumentation(arch, version, false);
+    versions.push(version);
   }
 
-  {
-    const version = bdsVersion.preview;
-    if (!versions.includes(version)) {
-      console.log("Start generate preview", version, "docs.");
-      await generateDocumentation(arch, version, true);
-      versions.push(version);
-    }
-  }
-
-  await writeJSON(versionsPath, versions);
+  await writeJSON(versionsPath, versionsMap);
 }
 
 if (import.meta.main) {
