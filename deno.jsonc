@@ -1,0 +1,20 @@
+{
+  "tasks": {
+    "run": "deno run --allow-run=unzip,PowerShell,./bedrock_server,bds/bedrock_server.exe --allow-net=raw.githubusercontent.com,minecraft.azureedge.net --allow-read=. --allow-write=. src/main.ts",
+
+    "compile": "deno compile --allow-run=$UNZIP,$BDS --allow-net=raw.githubusercontent.com,minecraft.azureedge.net --allow-read=. --allow-write=. --output build/generator --target $ARCH src/main.ts",
+    "compile-win": "ARCh=x86_64-pc-windows-msvc UNZIP=PowerShell BDS=bds/bedrock_server.exe deno task compile",
+    "compile-linux": "ARCh=x86_64-unknown-linux-gnu UNZIP=unzip BDS=./bedrock_server deno task compile"
+  },
+  "imports": {
+    "fs": "https://deno.land/std@0.176.0/fs/mod.ts",
+
+    "zip": "https://raw.githubusercontent.com/Lapis256/deno-zip/fix/windows/mod.ts"
+    // "zip": "https://deno.land/x/zip@v1.2.5/mod.ts"
+  },
+  "fmt": {
+    "options": {
+      "lineWidth": 100
+    }
+  }
+}
