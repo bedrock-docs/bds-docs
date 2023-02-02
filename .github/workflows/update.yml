@@ -1,1 +1,37 @@
+name: Update
 
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/10 * * * *"
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup repo
+        uses: actions/checkout@v3
+
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.deno
+            ~/.cache/deno
+          key: ${{ runner.os }}-deno-${{ hashFiles('deno.lock') }}
+
+      - name: Run update
+        run: deno task run
+
+      - name: Commit docs
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: "docs"
+          default_author: github_actions
+          message: "Add new versions."
