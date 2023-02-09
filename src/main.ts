@@ -28,8 +28,10 @@ async function main() {
     }
 
     console.log("Start generate", type, version, "docs.");
-    await generateDocumentation(arch, version, false);
-    versions.push(version);
+    const result = await generateDocumentation(arch, version, type == "preview");
+    if (result) {
+      versions.push(version);
+    }
   }
 
   await writeJSON(versionsPath, versionsMap);

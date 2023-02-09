@@ -1,6 +1,6 @@
 import { BDSVersions } from "./types.ts";
 
-const BASE_URL = "https://raw.githubusercontent.com/Bedrock-OSS/BDS-Versions/main/";
+const BASE_URL = "https://raw.githubusercontent.com/Bedrock-OSS/BDS-Versions/main";
 
 async function fetchJSON<T>(endpoint: string): Promise<T | undefined> {
   const res = await fetch(`${BASE_URL}/${endpoint}`);

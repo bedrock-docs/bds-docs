@@ -40,4 +40,5 @@ export async function generateDocumentation(
   await setupBDS(BDS_DIR_PATH);
   await launchBDS(arch, BDS_DIR_PATH);
   await move(`${BDS_DIR_PATH}/docs`, getDocsDir(version, preview), { overwrite: true });
+  return true;
 }
