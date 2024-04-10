@@ -1,0 +1,92 @@
+{
+    "title": "minecraft:repairable v1.20.50",
+    "description": "Repairable item component. Determines the items that can be used to repair this item along with how much durability they repair.",
+    "type": "object",
+    "properties": {
+        "repair_items": {
+            "title": "sequence container (std::vector<Puv::v1_20_50::RepairableItemComponent::RepairItemEntry>)",
+            "description": "List of repair item entries. Each entry needs to define a list of strings for `items` that can be used for the repair and an optional `repair_amount` for how much durability is repaired.",
+            "type": "array",
+            "items": {
+                "$ref": "#/$defs/3134106749"
+            }
+        }
+    },
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "minecraft:repairable v1.20.50",
+    "$defs": {
+        "1437147509": {
+            "title": "Puv::Legacy::ExpressionNode",
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "expression": {
+                            "type": "string"
+                        },
+                        "version": {
+                            "type": "integer"
+                        }
+                    },
+                    "required": [
+                        "expression",
+                        "version"
+                    ]
+                }
+            ]
+        },
+        "3038342253": {
+            "title": "Puv::Legacy::ItemDescriptor",
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "title": "associative container (std::map<std::string, std::string>)",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            ]
+        },
+        "3134106749": {
+            "title": "Puv::v1_20_50::RepairableItemComponent::RepairItemEntry",
+            "oneOf": [
+                {
+                    "title": "sequence container (std::vector<Puv::Legacy::ItemDescriptor>)",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/3038342253"
+                    }
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "items": {
+                            "title": "sequence container (std::vector<Puv::Legacy::ItemDescriptor>)",
+                            "description": "Items that may be used while repairing current item.",
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/$defs/3038342253"
+                            }
+                        },
+                        "repair_amount": {
+                            "description": "How much the item is repaired.",
+                            "$ref": "#/$defs/1437147509"
+                        }
+                    },
+                    "required": [
+                        "items"
+                    ]
+                }
+            ]
+        }
+    }
+}

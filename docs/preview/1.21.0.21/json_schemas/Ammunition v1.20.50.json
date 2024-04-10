@@ -1,0 +1,44 @@
+{
+    "title": "Puv::v1_20_50::ShooterItemComponent::Ammunition",
+    "type": "object",
+    "properties": {
+        "item": {
+            "description": "Ammunition item description identifier.",
+            "$ref": "#/$defs/3038342253"
+        },
+        "search_inventory": {
+            "description": "Can search inventory? Default is set to false.",
+            "type": "boolean"
+        },
+        "use_in_creative": {
+            "description": "Can use in Creative? Default is set to false.",
+            "type": "boolean"
+        },
+        "use_offhand": {
+            "description": "Can use offhand? Default is set to false.",
+            "type": "boolean"
+        }
+    },
+    "required": [
+        "item"
+    ],
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "Puv::v1_20_50::ShooterItemComponent::Ammunition",
+    "$defs": {
+        "3038342253": {
+            "title": "Puv::Legacy::ItemDescriptor",
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "title": "associative container (std::map<std::string, std::string>)",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            ]
+        }
+    }
+}
