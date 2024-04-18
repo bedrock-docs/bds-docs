@@ -1,0 +1,68 @@
+{
+    "title": "minecraft:block_placer v1.20.50",
+    "description": "Block Placer item component. Items with this component will place a block when used.",
+    "type": "object",
+    "properties": {
+        "block": {
+            "description": "Defines the block that will be placed.",
+            "type": "string"
+        },
+        "use_on": {
+            "title": "sequence container (std::vector<Puv::v1_20_50::BlockDescriptor>)",
+            "description": "List of block descriptors that contain blocks that this item can be used on. If left empty, all blocks will be allowed.",
+            "type": "array",
+            "items": {
+                "$ref": "#/$defs/353943876"
+            }
+        }
+    },
+    "required": [
+        "block"
+    ],
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "minecraft:block_placer v1.20.50",
+    "$defs": {
+        "2344466120": {
+            "title": "Puv::v1_20_50::BlockDescriptorSerializer::BlockDescriptorProxy",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "states": {
+                    "title": "associative container (std::map<std::string, Puv::v1_20_50::BlockDescriptor::Compound>)",
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/$defs/4089130557"
+                    }
+                },
+                "tags": {
+                    "type": "string"
+                }
+            }
+        },
+        "353943876": {
+            "title": "Puv::v1_20_50::BlockDescriptor",
+            "oneOf": [
+                {
+                    "$ref": "#/$defs/2344466120"
+                },
+                {
+                    "minLength": 1,
+                    "type": "string"
+                }
+            ]
+        },
+        "4089130557": {
+            "title": "compound_proxy",
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "integer"
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,77 @@
+{
+    "title": "Puv::v1_20_50::RepairableItemComponent::RepairItemEntry",
+    "oneOf": [
+        {
+            "title": "sequence container (std::vector<Puv::Legacy::ItemDescriptor>)",
+            "type": "array",
+            "items": {
+                "$ref": "#/$defs/3038342253"
+            }
+        },
+        {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "title": "sequence container (std::vector<Puv::Legacy::ItemDescriptor>)",
+                    "description": "Items that may be used while repairing current item.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/3038342253"
+                    }
+                },
+                "repair_amount": {
+                    "description": "How much the item is repaired.",
+                    "$ref": "#/$defs/1437147509"
+                }
+            },
+            "required": [
+                "items"
+            ]
+        }
+    ],
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "Puv::v1_20_50::RepairableItemComponent::RepairItemEntry",
+    "$defs": {
+        "1437147509": {
+            "title": "Puv::Legacy::ExpressionNode",
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "type": "number"
+                },
+                {
+                    "type": "object",
+                    "properties": {
+                        "expression": {
+                            "type": "string"
+                        },
+                        "version": {
+                            "type": "integer"
+                        }
+                    },
+                    "required": [
+                        "expression",
+                        "version"
+                    ]
+                }
+            ]
+        },
+        "3038342253": {
+            "title": "Puv::Legacy::ItemDescriptor",
+            "oneOf": [
+                {
+                    "type": "string"
+                },
+                {
+                    "title": "associative container (std::map<std::string, std::string>)",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                }
+            ]
+        }
+    }
+}
